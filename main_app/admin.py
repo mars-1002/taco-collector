@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Taco
+from .models import Taco, Feeding
 
 # Register your models here.
 admin.site.register(Taco)
+admin.site.register(Feeding)
