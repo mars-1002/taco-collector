@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+  <link 
+    rel="stylesheet"
+    type="text/css" 
+    href="{% static 'css/tacos/taco-detail.css' %}"
+  />
+{% endblock  %}
+
+{% block content %}
+
+<section class="taco-container">
+  <div class="taco-img">
+    <img 
+      class="taco-image"
+      src="{% static 'images/taco.png' %}" 
+      alt="A png of a taco"
+    >
+  </div>
+  <div class="taco-details">
+    <h1>{{ taco.name }}</h1>
+    {% if taco.order > 1 %}
+      <p>An order of {{ taco.order }} {{ taco.meat }} tacos.</p>
+    {% else %}
+      <p>A single {{ taco.meat }} taco. </p>
+    {% endif %}
+    <p><small>{{ taco.description }}</small></p>
+  </div>
+</section>
+
+{% endblock  %}

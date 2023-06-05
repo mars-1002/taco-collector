@@ -18,22 +18,24 @@
 <section class="card-container">
   {% for taco in tacos %}
     <div class="card">
-      <div class="card-content">
-        <div class="card-img-container">
-          <img 
-            class="taco-card-image"
-            src="{% static 'images/taco.png' %}" 
-            alt="Image of a taco"
-          >
+      <a href="{% url 'taco-detail' taco.id %}">
+        <div class="card-content">
+          <div class="card-img-container">
+            <img 
+              class="taco-card-image"
+              src="{% static 'images/taco.png' %}" 
+              alt="Image of a taco"
+            >
+          </div>
+          <h2 class="card-title">{{ taco.name }}</h2>
+          {% if taco.order > 1 %}
+            <p>An order of {{ taco.order }} {{ taco.meat }} tacos.</p>
+          {% else %}
+            <p>A single {{ taco.meat }} taco. </p>
+          {% endif %}
+          <p><small>{{ taco.description }}</small></p>
         </div>
-        <h2 class="card-title">{{ taco.name }}</h2>
-        {% if taco.order > 1 %}
-          <p>An order of {{ taco.order }} {{ taco.meat }} tacos.</p>
-        {% else %}
-          <p>A single {{ taco.meat }} taco. </p>
-        {% endif %}
-        <p><small>{{ taco.description }}</small></p>
-      </div>
+      </a>
     </div>
   {% endfor %}
 </section>
