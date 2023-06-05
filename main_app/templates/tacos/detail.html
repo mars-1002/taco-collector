@@ -28,6 +28,10 @@
     {% endif %}
     <p><small>{{ taco.description }}</small></p>
   </div>
+  <div class="taco-actions">
+    <a href="{% url 'taco-update' taco.id %}" class="btn warn">Edit</a>\
+    <a href="{% url 'taco-delete' taco.id %}" class="btn danger">Delete</a>
+  </div>
 </section>
 
 {% endblock  %}
