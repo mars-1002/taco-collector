@@ -16,10 +16,12 @@ def taco_index(request):
 
 def taco_detail(request, taco_id):
   taco = Taco.objects.get(id=taco_id)
+  sauces_taco_doesnt_have = Sauce.objects.exclude(id__in = taco.sauces.all().values_list('id'))
   feeding_form = FeedingForm()
   return render(request, 'tacos/detail.html', { 
     'taco': taco,
-    'feeding_form': feeding_form
+    'feeding_form': feeding_form,
+    'sauces': sauces_taco_doesnt_have
   })
 
 def add_feeding(request, taco_id):
@@ -32,7 +34,7 @@ def add_feeding(request, taco_id):
 
 class TacoCreate(CreateView):
   model = Taco
-  fields = '__all__'
+  fields = 'name', 'meat', 'description', 'order'
   success_url = '/tacos/'
 
 class TacoUpdate(UpdateView):
@@ -60,3 +62,7 @@ class SauceUpdate(UpdateView):
 class SauceDelete(DeleteView):
   model = Sauce
   success_url = '/sauces/'
+
+def assoc_sauce(request, taco_id, sauce_id):
+  Taco.objects.get(id=taco_id).sauces.add(sauce_id)
+  return redirect('taco-detail', taco_id=taco_id)

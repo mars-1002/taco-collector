@@ -24,6 +24,7 @@ class Taco(models.Model):
     meat = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
     order = models.IntegerField()
+    sauces = models.ManyToManyField(Sauce)
 
     def __str__(self):
         return self.name

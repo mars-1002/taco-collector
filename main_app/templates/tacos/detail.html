@@ -28,7 +28,7 @@
       alt="A png of a taco"
     >
   </div>
-  <div class="taco-details">
+  <div class="toy-details">
     <h1>{{ taco.name }}</h1>
     {% if taco.order > 1 %}
       <p>An order of {{ taco.order }} {{ taco.meat }} tacos.</p>
@@ -78,6 +78,55 @@
         {% endfor %}
       </tbody>
     </table>
+  </section>
+
+  <section class="sauces">
+    <div class="subsection-title">
+      <h2>Sauces</h2>
+    </div>
+    <h3>{{ taco.name }}'s Sauces</h3>
+    <div class="subsection-content">
+      {% if taco.sauces.count %}
+        {% for sauce in taco.sauces.all %}
+          <div class="toy-container">
+            <div 
+              class="color-block"
+              style="background-color: {{ sauce.color }}"
+            ></div>
+            <a href="{% url 'sauce-detail' sauce.id %}">
+              <p>A {{ sauce.color }} {{ sauce.name }}</p>
+            </a>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="no-toys">There's no sauces available for {{taco.name}} 😞</p>
+      {% endif %}
+    </div>
+
+    <h3>Available Sauces</h3>
+    <div class="subsection-content">
+      {% if sauces.count %}
+        {% for sauce in sauces.all %}
+          <div class="toy-container">
+            <div 
+              class="color-block"
+              style="background-color: {{ sauce.color }}"
+            ></div>
+            <a href="{% url 'sauce-detail' sauce.id %}">
+              <p>A {{ sauce.color }} {{ sauce.name }}</p>
+            </a>
+            <form action="{% url 'assoc-sauce' taco.id sauce.id %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn submit">Add Sauce</button>
+            </form>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="all-toys">
+          {{taco.name}} tacos already have all sauces available. 🥳
+        </p>
+      {% endif %}
+    </div>
   </section>
 </div>
 
