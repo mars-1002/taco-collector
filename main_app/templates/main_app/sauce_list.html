@@ -1,0 +1,32 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block head %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/sauces/sauce-index.css' %}"
+/>
+{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+  <h1>All Taco sauces</h1>
+</section>
+
+<section class="card-container">
+  {% for sauce in sauce_list %}
+  <div class="card" style="border-color: {{ sauce.color }}">
+    <div class="card-bg" style="background-color: {{ sauce.color }}"></div>
+    <a href="{% url 'sauce-detail' sauce.id %}">
+      <div class="card-content">
+        <h2>{{ sauce.name }}</h2>
+        <p>A {{ sauce.color }} sauce</p>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+</section>
+
+{% endblock %}

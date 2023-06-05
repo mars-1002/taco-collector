@@ -55,6 +55,11 @@
       class="subsection-content"
 			autocomplete="off"
     >
+      {% if taco.served_today %}
+        <p class="fed">You're full of {{taco.name}} tacos for the day!</p>
+      {% else %}
+        <p class="unfed">You should cook up some {{taco.name}} tacos!</p>
+      {% endif %}
       {% csrf_token %}
       {{ feeding_form.as_p }}
       <button type="submit" class="btn submit">Add Order</button>

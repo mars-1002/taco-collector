@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Taco
+from .models import Taco, Sauce
 from .forms import FeedingForm
+from django.views.generic import ListView, DetailView
 
 def home(request):
   return render(request, 'home.html')
@@ -42,3 +43,20 @@ class TacoDelete(DeleteView):
   model = Taco
   success_url = '/tacos/'
 
+class SauceCreate(CreateView):
+  model = Sauce
+  fields = '__all__'
+
+class SauceList(ListView):
+  model = Sauce
+
+class SauceDetail(DetailView):
+  model = Sauce
+
+class SauceUpdate(UpdateView):
+  model = Sauce
+  fields = ['name', 'color']
+
+class SauceDelete(DeleteView):
+  model = Sauce
+  success_url = '/sauces/'
